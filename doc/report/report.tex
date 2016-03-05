@@ -1,0 +1,53 @@
+% !TeX root = report.tex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !TeX document-id = {b18791db-4bf7-45f4-b2cb-865b91539759}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+%
+% Report for Student Intervention System
+% Udacity MLND Project 2
+%
+% Aravind Battaje
+
+\documentclass{article}
+
+% Packages used
+\usepackage[margin=1in]{geometry}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Begin document
+\begin{document}
+	% Document macros
+	\newmint[py]{python}{}
+	\newminted[pycode]{python}{}
+	\newmintinline[pyinl]{python}{}
+	
+	\title{Project Report: Student Intervention System}
+	\author{Aravind Battaje}
+	\maketitle
+	\section{Project Steps}
+	TODO: Write later
+	
+	\section{Classification vs Regression}
+	A machine learning algorithm can be classified into two types, based on its nature of outputs, viz., classification and regression. Classification supports outputs of discrete values and regression outputs continuous values. This project entails a classification type of problem because the output desired from the \emph{intervention system} is discrete in nature, i.e., a student graduates or not from his/her current characteristics. Regression would be more suitable for, say an algorithm that predicts the final exam score from a student's current academic records.
+	
+	\section{Dataset}
+	Several qualities of students such as their family background, social characteristics, extra-curricular activities, etc., along with the information if they graduated or not, are given along with the project \texttt{(student-data.csv)}. The dataset possess following characteristics:
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Total number of students & 395 \\
+			Number of students who passed & 265 \\
+			Number of students who failed & 130  \\
+			Graduation rate of the class & 67.09\% \\
+			Number of features of dataset & 30 \\
+			\hline
+		\end{tabular}
+		\label{tab:data_characteristics}
+	\end{center}
+\end{document}
