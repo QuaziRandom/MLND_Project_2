@@ -1,15 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.1.18)  5 MAR 2016 19:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.15)  19 MAR 2016 10:57
 entering extended mode
-**./report.tex
-(report.tex
-LaTeX2e <2015/10/01> patch level 2
-Babel <3.9m> and hyphenation patterns for 69 languages loaded.
-
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cl
-s"
+ \write18 enabled.
+ %&-line parsing enabled.
+**report.tex
+(./report.tex
+LaTeX2e <2015/01/01>
+Babel <3.9l> and hyphenation patterns for 2 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size10.clo
-"
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -24,27 +23,22 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geomet
-ry.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval
-.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpd
-f.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifvt
-ex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxet
-ex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -59,35 +53,26 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2015/01/31 v2.0 Yet another Pygments shim for LaTeX
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geomet
-ry.cfg"))
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minted\minted.s
-ty"
-Package: minted 2015/09/09 v2.1 Yet another Pygments shim for LaTeX
-
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvopti
-ons.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxc
-mds.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kvse
-tkeys.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infw
-arerr.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\etex
-cmds.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\iflu
-atex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -96,8 +81,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fancyvrb\fancyv
-rb.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
@@ -108,9 +92,7 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count91
 \FV@StepNumber=\count92
 \FV@OutFile=\write3
-)
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
-"
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count93
 \float@exts=\toks16
@@ -118,11 +100,10 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks17
 \@floatcapt=\box28
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count94
 \calc@Bcount=\count95
@@ -135,12 +116,10 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count96
 \calc@Cskip=\skip45
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ifplatform\ifpl
-atform.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
 Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\pdft
-excmds.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -148,27 +127,27 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\catc
-hfile.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/catchfile.sty
 Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
-))
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\etoolbox\etoolb
-ox.sty"
+)
+runsystem(uname -s > "report.w18")...executed.
+
+
+(./report.w18)
+runsystem(rm -- "report.w18")...executed.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count97
-)
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xstring\xstring
-.sty"
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xstring\xstri
-ng.tex"
+) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
 \@xs@message=\write4
 \integerpart=\count98
 \decimalpart=\count99
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lineno\lineno.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count100
 \output=\toks18
@@ -201,91 +180,80 @@ LaTeX Info: Redefining \\ on input line 3056.
 \@float@every@listing=\toks19
 \c@listing=\count109
 )
-runsystem(if not exist "_minted-report" mkdir "_minted-report")...executed.
+runsystem(mkdir -p "_minted-report")...executed.
 
- (_minted-report/default.pygstyle)
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\multirow\multir
-ow.sty"
+runsystem(which "pygmentize" && touch "report.aex")...executed.
+
+runsystem(rm "report.aex")...executed.
+
+
+(./_minted-report/default.pygstyle)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen123
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\tabularx.
-sty"
-Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
-
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty
-"
-Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen124
-\extrarowheight=\dimen125
-\NC@list=\toks20
-\extratabsurround=\skip46
-\backup@length=\skip47
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen124
+\lightrulewidth=\dimen125
+\cmidrulewidth=\dimen126
+\belowrulesep=\dimen127
+\belowbottomsep=\dimen128
+\aboverulesep=\dimen129
+\abovetopsep=\dimen130
+\cmidrulesep=\dimen131
+\cmidrulekern=\dimen132
+\defaultaddspace=\dimen133
+\@cmidla=\count110
+\@cmidlb=\count111
+\@aboverulesep=\dimen134
+\@belowrulesep=\dimen135
+\@thisruleclass=\count112
+\@lastruleclass=\count113
+\@thisrulewidth=\dimen136
 )
-\TX@col@width=\dimen126
-\TX@old@table=\dimen127
-\TX@old@col=\dimen128
-\TX@target=\dimen129
-\TX@delta=\dimen130
-\TX@cols=\count110
-\TX@ftn=\toks21
-)
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
-cx.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
-cs.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\graphi
-cs.cfg"
-File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 94.
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdftex-def\pdft
-ex.def"
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count111
+\Gread@gobject=\count114
 ))
-\Gin@req@height=\dimen131
-\Gin@req@width=\dimen132
+\Gin@req@height=\dimen137
+\Gin@req@width=\dimen138
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption
-.sty"
-Package: caption 2015/09/17 v3.3-111 Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption
-3.sty"
-Package: caption3 2015/09/20 v1.7-115 caption3 kernel (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen133
-\captionmargin@=\dimen134
-\captionwidth=\dimen135
-\caption@tempdima=\dimen136
-\caption@indent=\dimen137
-\caption@parindent=\dimen138
-\caption@hangindent=\dimen139
+\captionmargin=\dimen139
+\captionmargin@=\dimen140
+\captionwidth=\dimen141
+\caption@tempdima=\dimen142
+\caption@indent=\dimen143
+\caption@parindent=\dimen144
+\caption@hangindent=\dimen145
 )
-\c@ContinuedFloat=\count112
+\c@ContinuedFloat=\count115
 Package caption Info: float package is loaded.
 )
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcapt
-ion.sty"
-Package: subcaption 2015/09/15 v1.1-100 Sub-captions (AR)
-\c@subfigure=\count113
-\c@subtable=\count114
-)
-runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set >"re
-port.aex" <nul: /p x=^%~$PATH:i>>"report.aex")...executed.
-
-runsystem(del "report.aex")...executed.
-
- (report.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count116
+\c@subtable=\count117
+) (./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -300,7 +268,6 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -335,13 +302,10 @@ LaTeX Font Info:    ... okay on input line 24.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\color.
-cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -354,22 +318,38 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
-) (_minted-report/default-pyg-prefix.pygstyle)
-("C:\Users\Predator\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf
-.mkii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen140
-\scratchbox=\box33
-\nofMPsegments=\count116
-\nofMParguments=\count117
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen141
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
-\everyMPtoPDFconversion=\toks23
 )
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count118
+\scratchdimen=\dimen146
+\scratchbox=\box33
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen147
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -389,29 +369,42 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 42.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 42.
+\openout5 = `report.pyg'.
+
+
+(./_minted-report/AE670DD98A412738A94231ABF4AD2FAC349DE794E1C45A1CBA5D45E1D9685
+052.pygtex)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+runsystem(rm "report.pyg")...executed.
+
 [1
 
-{C:/Users/Predator/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(report.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 5950 strings out of 493634
- 100439 string characters out of 3134015
- 206514 words of memory out of 3000000
- 9270 multiletter control sequences out of 15000+200000
- 7794 words of font info for 28 fonts, out of 3000000 for 9000
- 1025 hyphenation exceptions out of 8191
- 37i,6n,38p,819b,182s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Predator/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmbx12.pfb><C:/Users/Predator/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Predator/AppData/Local/P
-rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Predator/
-AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/
-Users/Predator/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmti10.pfb><C:/Users/Predator/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (1 page, 81825 bytes).
+ 5821 strings out of 495000
+ 95665 string characters out of 6181169
+ 204698 words of memory out of 5000000
+ 8978 multiletter control sequences out of 15000+600000
+ 8101 words of font info for 29 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 37i,9n,38p,817b,292s stack positions out of 5000i,500n,10000p,200000b,80000s
+</
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (3 pages, 92006 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 42 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
