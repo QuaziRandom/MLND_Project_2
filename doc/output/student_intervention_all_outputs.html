@@ -2227,7 +2227,7 @@ DecisionTreeClassifier(class_weight=None, criterion=&apos;gini&apos;, max_depth=
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predicting labels on train data using DecisionTreeClassifier...
 Done!
-Prediction time on train data (secs): 0.002
+Prediction time on train data (secs): 0.001
 F1 score for training set: 1.0
 </pre>
 </div>
@@ -2259,7 +2259,7 @@ F1 score for training set: 1.0
 <pre>Predicting labels on test data using DecisionTreeClassifier...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.645161290323
+F1 score for test set: 0.746031746032
 </pre>
 </div>
 </div>
@@ -2415,6 +2415,8 @@ F1 score for test set: 0.645161290323
     <span class="k">print</span> <span class="s2">&quot;Completed {} runs with {} classifier in {:.3f} seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">num_runs</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
 
+    <span class="n">data_for_latex_table</span> <span class="o">=</span> <span class="p">{}</span>
+    
     <span class="k">for</span> <span class="n">size_idx</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">training_sample_sizes</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">For {} training samples:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Mean training time (secs): {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_fit</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
@@ -2424,6 +2426,22 @@ F1 score for test set: 0.645161290323
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">F1 scores:&quot;</span>
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Train data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Test data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+        
+        <span class="n">data_for_latex_table</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_fit</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]),</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])],</span>
+            <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Training time (msec)&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;Prediction time - Training set (msec)&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;Prediction time - Testing set (msec)&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;F1 score - Training set&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;F1 score - Testing set&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Print a basic latex table</span>
+    <span class="k">print</span> <span class="s2">&quot;LaTeX output as a table:&quot;</span>
+    <span class="k">print</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_for_latex_table</span><span class="p">)</span><span class="o">.</span><span class="n">to_latex</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -2477,41 +2495,41 @@ F1 score for test set: 0.645161290323
 Training set size: 100
 Training GaussianNB...
 Done!
-Training time (secs): 0.002
+Training time (secs): 0.004
 Predicting labels on train data using GaussianNB...
 Done!
-Prediction time on train data (secs): 0.001
-F1 score for training set: 0.577319587629
+Prediction time on train data (secs): 0.002
+F1 score for training set: 0.505494505495
 Predicting labels on test data using GaussianNB...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.435643564356
+F1 score for test set: 0.380952380952
 ------------------------------------------
 Training set size: 200
 Training GaussianNB...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.004
 Predicting labels on train data using GaussianNB...
 Done!
-Prediction time on train data (secs): 0.001
-F1 score for training set: 0.8
+Prediction time on train data (secs): 0.002
+F1 score for training set: 0.813432835821
 Predicting labels on test data using GaussianNB...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.691729323308
+F1 score for test set: 0.771653543307
 ------------------------------------------
 Training set size: 300
 Training GaussianNB...
 Done!
-Training time (secs): 0.002
+Training time (secs): 0.004
 Predicting labels on train data using GaussianNB...
 Done!
-Prediction time on train data (secs): 0.001
-F1 score for training set: 0.777493606138
+Prediction time on train data (secs): 0.002
+F1 score for training set: 0.80193236715
 Predicting labels on test data using GaussianNB...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.75
+F1 score for test set: 0.748091603053
 </pre>
 </div>
 </div>
@@ -2551,34 +2569,47 @@ F1 score for test set: 0.75
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Completed 100 runs with GaussianNB classifier in 1.846 seconds
+<pre>Completed 100 runs with GaussianNB classifier in 1.661 seconds
 
 For 100 training samples:
-	Mean training time (secs): 0.001277
+	Mean training time (secs): 0.001137
 	Mean prediction times (secs):
-		Train data: 0.000600
-		Test data: 0.000587
+		Train data: 0.000540
+		Test data: 0.000535
 	F1 scores:
-		Train data: 0.692379
-		Test data: 0.590673
+		Train data: 0.703436
+		Test data: 0.613627
 
 For 200 training samples:
-	Mean training time (secs): 0.001523
+	Mean training time (secs): 0.001402
 	Mean prediction times (secs):
-		Train data: 0.000797
-		Test data: 0.000578
+		Train data: 0.000743
+		Test data: 0.000538
 	F1 scores:
-		Train data: 0.792404
-		Test data: 0.735349
+		Train data: 0.800078
+		Test data: 0.746451
 
 For 300 training samples:
-	Mean training time (secs): 0.001799
+	Mean training time (secs): 0.001678
 	Mean prediction times (secs):
-		Train data: 0.000978
-		Test data: 0.000588
+		Train data: 0.000941
+		Test data: 0.000542
 	F1 scores:
-		Train data: 0.797895
-		Test data: 0.754015
+		Train data: 0.797350
+		Test data: 0.752224
+LaTeX output as a table:
+\begin{tabular}{lrrr}
+\toprule
+{} &amp;       100 &amp;       200 &amp;       300 \\
+\midrule
+Training time (msec)                  &amp;  1.136737 &amp;  1.401565 &amp;  1.677573 \\
+Prediction time - Training set (msec) &amp;  0.539596 &amp;  0.743282 &amp;  0.940869 \\
+Prediction time - Testing set (msec)  &amp;  0.535090 &amp;  0.538042 &amp;  0.541995 \\
+F1 score - Training set               &amp;  0.703436 &amp;  0.800078 &amp;  0.797350 \\
+F1 score - Testing set                &amp;  0.613627 &amp;  0.746451 &amp;  0.752224 \\
+\bottomrule
+\end{tabular}
+
 </pre>
 </div>
 </div>
@@ -2636,41 +2667,41 @@ For 300 training samples:
 Training set size: 100
 Training SVC...
 Done!
-Training time (secs): 0.007
+Training time (secs): 0.006
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.001
-F1 score for training set: 0.90625
+F1 score for training set: 0.917293233083
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.650406504065
+F1 score for test set: 0.70796460177
 ------------------------------------------
 Training set size: 200
 Training SVC...
 Done!
-Training time (secs): 0.023
+Training time (secs): 0.019
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.002
-F1 score for training set: 0.837037037037
+F1 score for training set: 0.881118881119
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.827586206897
+F1 score for test set: 0.742424242424
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.041
+Training time (secs): 0.046
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.004
-F1 score for training set: 0.838862559242
+Prediction time on train data (secs): 0.003
+F1 score for training set: 0.845637583893
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.777777777778
+F1 score for test set: 0.763358778626
 </pre>
 </div>
 </div>
@@ -2716,41 +2747,41 @@ F1 score for test set: 0.777777777778
 Training set size: 100
 Training SVC...
 Done!
-Training time (secs): 0.002
+Training time (secs): 0.005
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.001
-F1 score for training set: 0.90780141844
+Prediction time on train data (secs): 0.002
+F1 score for training set: 0.896103896104
 Predicting labels on test data using SVC...
 Done!
-Prediction time on test data (secs): 0.001
-F1 score for test set: 0.834355828221
+Prediction time on test data (secs): 0.002
+F1 score for test set: 0.771241830065
 ------------------------------------------
 Training set size: 200
 Training SVC...
 Done!
-Training time (secs): 0.006
+Training time (secs): 0.009
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.004
-F1 score for training set: 0.904109589041
+Prediction time on train data (secs): 0.007
+F1 score for training set: 0.915824915825
 Predicting labels on test data using SVC...
 Done!
-Prediction time on test data (secs): 0.002
-F1 score for test set: 0.830188679245
+Prediction time on test data (secs): 0.003
+F1 score for test set: 0.763157894737
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.013
+Training time (secs): 0.015
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.010
-F1 score for training set: 0.922352941176
+Prediction time on train data (secs): 0.011
+F1 score for training set: 0.911504424779
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.003
-F1 score for test set: 0.789473684211
+F1 score for test set: 0.77027027027
 </pre>
 </div>
 </div>
@@ -2800,11 +2831,11 @@ Training time (secs): 0.002
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.001
-F1 score for training set: 0.886075949367
+F1 score for training set: 0.896551724138
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.880952380952
+F1 score for test set: 0.8125
 ------------------------------------------
 Training set size: 200
 Training SVC...
@@ -2813,24 +2844,24 @@ Training time (secs): 0.004
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.003
-F1 score for training set: 0.88275862069
+F1 score for training set: 0.884892086331
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.001
-F1 score for test set: 0.869565217391
+F1 score for test set: 0.786666666667
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.009
+Training time (secs): 0.008
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.006
-F1 score for training set: 0.886310904872
+Prediction time on train data (secs): 0.005
+F1 score for training set: 0.892938496583
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.002
-F1 score for test set: 0.875
+F1 score for test set: 0.789473684211
 </pre>
 </div>
 </div>
@@ -2876,41 +2907,41 @@ F1 score for test set: 0.875
 Training set size: 100
 Training SVC...
 Done!
-Training time (secs): 0.002
+Training time (secs): 0.003
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.001
-F1 score for training set: 0.888888888889
+F1 score for training set: 0.897959183673
 Predicting labels on test data using SVC...
 Done!
-Prediction time on test data (secs): 0.001
-F1 score for test set: 0.746666666667
+Prediction time on test data (secs): 0.002
+F1 score for test set: 0.78431372549
 ------------------------------------------
 Training set size: 200
 Training SVC...
 Done!
-Training time (secs): 0.004
+Training time (secs): 0.007
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.003
-F1 score for training set: 0.90625
+Prediction time on train data (secs): 0.004
+F1 score for training set: 0.910299003322
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.002
-F1 score for test set: 0.756756756757
+F1 score for test set: 0.776315789474
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.009
+Training time (secs): 0.012
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.007
-F1 score for training set: 0.896551724138
+Prediction time on train data (secs): 0.008
+F1 score for training set: 0.907079646018
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.003
-F1 score for test set: 0.756756756757
+F1 score for test set: 0.786666666667
 </pre>
 </div>
 </div>
@@ -2960,11 +2991,11 @@ Training time (secs): 0.001
 Predicting labels on train data using SVC...
 Done!
 Prediction time on train data (secs): 0.001
-F1 score for training set: 0.837209302326
+F1 score for training set: 0.765432098765
 Predicting labels on test data using SVC...
 Done!
-Prediction time on test data (secs): 0.002
-F1 score for test set: 0.819875776398
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.848484848485
 ------------------------------------------
 Training set size: 200
 Training SVC...
@@ -2972,25 +3003,25 @@ Done!
 Training time (secs): 0.003
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.002
-F1 score for training set: 0.798798798799
+Prediction time on train data (secs): 0.003
+F1 score for training set: 0.784194528875
 Predicting labels on test data using SVC...
 Done!
-Prediction time on test data (secs): 0.001
-F1 score for test set: 0.819875776398
+Prediction time on test data (secs): 0.002
+F1 score for test set: 0.848484848485
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.007
+Training time (secs): 0.006
 Predicting labels on train data using SVC...
 Done!
-Prediction time on train data (secs): 0.005
-F1 score for training set: 0.797595190381
+Prediction time on train data (secs): 0.006
+F1 score for training set: 0.787878787879
 Predicting labels on test data using SVC...
 Done!
 Prediction time on test data (secs): 0.002
-F1 score for test set: 0.819875776398
+F1 score for test set: 0.848484848485
 </pre>
 </div>
 </div>
@@ -3041,34 +3072,47 @@ F1 score for test set: 0.819875776398
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Completed 100 runs with SVC classifier in 3.595 seconds
+<pre>Completed 100 runs with SVC classifier in 3.552 seconds
 
 For 100 training samples:
-	Mean training time (secs): 0.001453
+	Mean training time (secs): 0.001436
 	Mean prediction times (secs):
-		Train data: 0.000803
-		Test data: 0.000761
+		Train data: 0.000799
+		Test data: 0.000759
 	F1 scores:
-		Train data: 0.911967
-		Test data: 0.801096
+		Train data: 0.912564
+		Test data: 0.794443
 
 For 200 training samples:
-	Mean training time (secs): 0.004102
+	Mean training time (secs): 0.004017
 	Mean prediction times (secs):
-		Train data: 0.002657
-		Test data: 0.001316
+		Train data: 0.002626
+		Test data: 0.001313
 	F1 scores:
-		Train data: 0.904125
-		Test data: 0.796649
+		Train data: 0.903239
+		Test data: 0.790969
 
 For 300 training samples:
-	Mean training time (secs): 0.008127
+	Mean training time (secs): 0.008039
 	Mean prediction times (secs):
-		Train data: 0.005442
-		Test data: 0.001812
+		Train data: 0.005505
+		Test data: 0.001809
 	F1 scores:
-		Train data: 0.895710
-		Test data: 0.796960
+		Train data: 0.895141
+		Test data: 0.792418
+LaTeX output as a table:
+\begin{tabular}{lrrr}
+\toprule
+{} &amp;       100 &amp;       200 &amp;       300 \\
+\midrule
+Training time (msec)                  &amp;  1.436007 &amp;  4.016979 &amp;  8.038867 \\
+Prediction time - Training set (msec) &amp;  0.798676 &amp;  2.626345 &amp;  5.504694 \\
+Prediction time - Testing set (msec)  &amp;  0.758820 &amp;  1.313007 &amp;  1.809123 \\
+F1 score - Training set               &amp;  0.912564 &amp;  0.903239 &amp;  0.895141 \\
+F1 score - Testing set                &amp;  0.794443 &amp;  0.790969 &amp;  0.792418 \\
+\bottomrule
+\end{tabular}
+
 </pre>
 </div>
 </div>
@@ -3109,34 +3153,47 @@ For 300 training samples:
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Completed 100 runs with SVC classifier in 4.617 seconds
+<pre>Completed 100 runs with SVC classifier in 4.584 seconds
 
 For 100 training samples:
-	Mean training time (secs): 0.001732
+	Mean training time (secs): 0.001721
 	Mean prediction times (secs):
-		Train data: 0.001110
-		Test data: 0.001057
+		Train data: 0.001103
+		Test data: 0.001051
 	F1 scores:
-		Train data: 0.927338
-		Test data: 0.801998
+		Train data: 0.927031
+		Test data: 0.800927
 
 For 200 training samples:
-	Mean training time (secs): 0.005237
+	Mean training time (secs): 0.005235
 	Mean prediction times (secs):
-		Train data: 0.003872
-		Test data: 0.001904
+		Train data: 0.003869
+		Test data: 0.001893
 	F1 scores:
-		Train data: 0.912037
-		Test data: 0.804878
+		Train data: 0.911822
+		Test data: 0.805108
 
 For 300 training samples:
-	Mean training time (secs): 0.010799
+	Mean training time (secs): 0.010759
 	Mean prediction times (secs):
-		Train data: 0.008236
-		Test data: 0.002694
+		Train data: 0.008229
+		Test data: 0.002676
 	F1 scores:
-		Train data: 0.903940
-		Test data: 0.809745
+		Train data: 0.904793
+		Test data: 0.808884
+LaTeX output as a table:
+\begin{tabular}{lrrr}
+\toprule
+{} &amp;       100 &amp;       200 &amp;        300 \\
+\midrule
+Training time (msec)                  &amp;  1.720572 &amp;  5.235305 &amp;  10.758593 \\
+Prediction time - Training set (msec) &amp;  1.102505 &amp;  3.869443 &amp;   8.228962 \\
+Prediction time - Testing set (msec)  &amp;  1.050613 &amp;  1.893101 &amp;   2.676311 \\
+F1 score - Training set               &amp;  0.927031 &amp;  0.911822 &amp;   0.904793 \\
+F1 score - Testing set                &amp;  0.800927 &amp;  0.805108 &amp;   0.808884 \\
+\bottomrule
+\end{tabular}
+
 </pre>
 </div>
 </div>
@@ -3259,41 +3316,41 @@ For 300 training samples:
 Training set size: 100
 Training DecisionTreeClassifier...
 Done!
-Training time (secs): 0.001
-Predicting labels on train data using DecisionTreeClassifier...
-Done!
-Prediction time on train data (secs): 0.000
-F1 score for training set: 1.0
-Predicting labels on test data using DecisionTreeClassifier...
-Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.5
-------------------------------------------
-Training set size: 150
-Training DecisionTreeClassifier...
-Done!
-Training time (secs): 0.001
-Predicting labels on train data using DecisionTreeClassifier...
-Done!
-Prediction time on train data (secs): 0.000
-F1 score for training set: 1.0
-Predicting labels on test data using DecisionTreeClassifier...
-Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.44
-------------------------------------------
-Training set size: 200
-Training DecisionTreeClassifier...
-Done!
-Training time (secs): 0.002
+Training time (secs): 0.003
 Predicting labels on train data using DecisionTreeClassifier...
 Done!
 Prediction time on train data (secs): 0.001
 F1 score for training set: 1.0
 Predicting labels on test data using DecisionTreeClassifier...
 Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.509803921569
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.677419354839
+------------------------------------------
+Training set size: 150
+Training DecisionTreeClassifier...
+Done!
+Training time (secs): 0.003
+Predicting labels on train data using DecisionTreeClassifier...
+Done!
+Prediction time on train data (secs): 0.001
+F1 score for training set: 1.0
+Predicting labels on test data using DecisionTreeClassifier...
+Done!
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.571428571429
+------------------------------------------
+Training set size: 200
+Training DecisionTreeClassifier...
+Done!
+Training time (secs): 0.004
+Predicting labels on train data using DecisionTreeClassifier...
+Done!
+Prediction time on train data (secs): 0.001
+F1 score for training set: 1.0
+Predicting labels on test data using DecisionTreeClassifier...
+Done!
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.612903225806
 
 Sample run with boosted classifier AdaBoostClassifier(algorithm=&apos;SAMME.R&apos;,
           base_estimator=DecisionTreeClassifier(class_weight=None, criterion=&apos;gini&apos;, max_depth=15,
@@ -3305,41 +3362,41 @@ Sample run with boosted classifier AdaBoostClassifier(algorithm=&apos;SAMME.R&ap
 Training set size: 100
 Training AdaBoostClassifier...
 Done!
-Training time (secs): 0.003
+Training time (secs): 0.006
 Predicting labels on train data using AdaBoostClassifier...
 Done!
-Prediction time on train data (secs): 0.001
+Prediction time on train data (secs): 0.004
 F1 score for training set: 1.0
 Predicting labels on test data using AdaBoostClassifier...
 Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.626865671642
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.524590163934
 ------------------------------------------
 Training set size: 150
 Training AdaBoostClassifier...
 Done!
-Training time (secs): 0.004
+Training time (secs): 0.005
 Predicting labels on train data using AdaBoostClassifier...
 Done!
 Prediction time on train data (secs): 0.001
 F1 score for training set: 1.0
 Predicting labels on test data using AdaBoostClassifier...
 Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.647887323944
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.625
 ------------------------------------------
 Training set size: 200
 Training AdaBoostClassifier...
 Done!
-Training time (secs): 0.004
+Training time (secs): 0.005
 Predicting labels on train data using AdaBoostClassifier...
 Done!
 Prediction time on train data (secs): 0.001
 F1 score for training set: 1.0
 Predicting labels on test data using AdaBoostClassifier...
 Done!
-Prediction time on test data (secs): 0.000
-F1 score for test set: 0.53125
+Prediction time on test data (secs): 0.001
+F1 score for test set: 0.634920634921
 </pre>
 </div>
 </div>
@@ -3399,11 +3456,11 @@ Training time (secs): 0.001
 Predicting labels on train data using DecisionTreeClassifier...
 Done!
 Prediction time on train data (secs): 0.000
-F1 score for training set: 0.606741573034
+F1 score for training set: 0.72
 Predicting labels on test data using DecisionTreeClassifier...
 Done!
 Prediction time on test data (secs): 0.000
-F1 score for test set: 0.458333333333
+F1 score for test set: 0.527777777778
 ------------------------------------------
 Training set size: 150
 Training DecisionTreeClassifier...
@@ -3412,11 +3469,11 @@ Training time (secs): 0.001
 Predicting labels on train data using DecisionTreeClassifier...
 Done!
 Prediction time on train data (secs): 0.000
-F1 score for training set: 0.698924731183
+F1 score for training set: 0.69
 Predicting labels on test data using DecisionTreeClassifier...
 Done!
 Prediction time on test data (secs): 0.000
-F1 score for test set: 0.704225352113
+F1 score for test set: 0.697674418605
 ------------------------------------------
 Training set size: 200
 Training DecisionTreeClassifier...
@@ -3424,12 +3481,12 @@ Done!
 Training time (secs): 0.001
 Predicting labels on train data using DecisionTreeClassifier...
 Done!
-Prediction time on train data (secs): 0.000
-F1 score for training set: 0.719367588933
+Prediction time on train data (secs): 0.001
+F1 score for training set: 0.722891566265
 Predicting labels on test data using DecisionTreeClassifier...
 Done!
 Prediction time on test data (secs): 0.000
-F1 score for test set: 0.704225352113
+F1 score for test set: 0.727272727273
 
 Sample run with boosted classifier AdaBoostClassifier(algorithm=&apos;SAMME.R&apos;,
           base_estimator=DecisionTreeClassifier(class_weight=None, criterion=&apos;gini&apos;, max_depth=1,
@@ -3441,15 +3498,15 @@ Sample run with boosted classifier AdaBoostClassifier(algorithm=&apos;SAMME.R&ap
 Training set size: 100
 Training AdaBoostClassifier...
 Done!
-Training time (secs): 0.115
+Training time (secs): 0.116
 Predicting labels on train data using AdaBoostClassifier...
 Done!
-Prediction time on train data (secs): 0.012
-F1 score for training set: 0.954545454545
+Prediction time on train data (secs): 0.010
+F1 score for training set: 0.989898989899
 Predicting labels on test data using AdaBoostClassifier...
 Done!
-Prediction time on test data (secs): 0.009
-F1 score for test set: 0.633333333333
+Prediction time on test data (secs): 0.008
+F1 score for test set: 0.686567164179
 ------------------------------------------
 Training set size: 150
 Training AdaBoostClassifier...
@@ -3458,24 +3515,24 @@ Training time (secs): 0.145
 Predicting labels on train data using AdaBoostClassifier...
 Done!
 Prediction time on train data (secs): 0.010
-F1 score for training set: 0.835820895522
+F1 score for training set: 0.90780141844
 Predicting labels on test data using AdaBoostClassifier...
 Done!
 Prediction time on test data (secs): 0.008
-F1 score for test set: 0.59649122807
+F1 score for test set: 0.69696969697
 ------------------------------------------
 Training set size: 200
 Training AdaBoostClassifier...
 Done!
-Training time (secs): 0.121
+Training time (secs): 0.120
 Predicting labels on train data using AdaBoostClassifier...
 Done!
 Prediction time on train data (secs): 0.010
-F1 score for training set: 0.782178217822
+F1 score for training set: 0.836538461538
 Predicting labels on test data using AdaBoostClassifier...
 Done!
 Prediction time on test data (secs): 0.008
-F1 score for test set: 0.71186440678
+F1 score for test set: 0.688524590164
 </pre>
 </div>
 </div>
@@ -3535,14 +3592,33 @@ F1 score for test set: 0.71186440678
     <span class="n">num_runs_adaboost</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
 <span class="k">print</span> <span class="s2">&quot;Mean training/fitting run times (secs): {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_fit</span><span class="p">))</span>
 
-<span class="k">for</span> <span class="n">size_idx</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">adaboost_training_sizes</span><span class="p">):</span>
+<span class="n">data_for_latex_table</span> <span class="o">=</span> <span class="p">{}</span>
+    
+<span class="k">for</span> <span class="n">size_idx</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">training_sample_sizes</span><span class="p">):</span>
     <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">For {} training samples:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Mean training time (secs): {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_fit</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
     <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Mean prediction times (secs):&quot;</span>
-    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Train data: {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
-    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Test data: {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Train data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Test data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
     <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">F1 scores:&quot;</span>
-    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Train data: {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
-    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Test data: {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Train data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Test data: {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]))</span>
+
+    <span class="n">data_for_latex_table</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_fit</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_times_predict_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_train</span><span class="p">[</span><span class="n">size_idx</span><span class="p">]),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">run_f1_scores_test</span><span class="p">[</span><span class="n">size_idx</span><span class="p">])],</span>
+        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Training time (msec)&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Prediction time - Training set (msec)&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Prediction time - Testing set (msec)&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;F1 score - Training set&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;F1 score - Testing set&#39;</span><span class="p">])</span>
+
+<span class="c1"># Print a basic latex table</span>
+<span class="k">print</span> <span class="s2">&quot;LaTeX output as a table:&quot;</span>
+<span class="k">print</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_for_latex_table</span><span class="p">)</span><span class="o">.</span><span class="n">to_latex</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -3555,32 +3631,48 @@ F1 score for test set: 0.71186440678
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Completed 100 runs with AdaBoostClassifier classifier in 40.882 seconds
+<pre>Completed 100 runs with AdaBoostClassifier classifier in 40.516 seconds
 Mean training/fitting run times (secs): 0.119
 
 For 100 training samples:
+	Mean training time (secs): 0.117802
 	Mean prediction times (secs):
-		Train data: 0.009
-		Test data: 0.008
+		Train data: 0.008636
+		Test data: 0.007870
 	F1 scores:
-		Train data: 0.948
-		Test data: 0.589
-
-For 150 training samples:
-	Mean prediction times (secs):
-		Train data: 0.009
-		Test data: 0.008
-	F1 scores:
-		Train data: 0.862
-		Test data: 0.606
+		Train data: 0.946344
+		Test data: 0.600363
 
 For 200 training samples:
+	Mean training time (secs): 0.118160
 	Mean prediction times (secs):
-		Train data: 0.010
-		Test data: 0.008
+		Train data: 0.009314
+		Test data: 0.007871
 	F1 scores:
-		Train data: 0.820
-		Test data: 0.618
+		Train data: 0.861951
+		Test data: 0.618745
+
+For 300 training samples:
+	Mean training time (secs): 0.117821
+	Mean prediction times (secs):
+		Train data: 0.010000
+		Test data: 0.007901
+	F1 scores:
+		Train data: 0.815256
+		Test data: 0.623853
+LaTeX output as a table:
+\begin{tabular}{lrrr}
+\toprule
+{} &amp;         100 &amp;         200 &amp;         300 \\
+\midrule
+Training time (msec)                  &amp;  117.801905 &amp;  118.160009 &amp;  117.820978 \\
+Prediction time - Training set (msec) &amp;    8.635652 &amp;    9.313602 &amp;   10.000334 \\
+Prediction time - Testing set (msec)  &amp;    7.869866 &amp;    7.871335 &amp;    7.900503 \\
+F1 score - Training set               &amp;    0.946344 &amp;    0.861951 &amp;    0.815256 \\
+F1 score - Testing set                &amp;    0.600363 &amp;    0.618745 &amp;    0.623853 \\
+\bottomrule
+\end{tabular}
+
 </pre>
 </div>
 </div>
@@ -3655,7 +3747,7 @@ For 200 training samples:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Starting cross-validated grid search...
-Found the best match in 70.375 sec
+Found the best match in 65.257 sec
 </pre>
 </div>
 </div>
@@ -3692,16 +3784,16 @@ Found the best match in 70.375 sec
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Configuration of best estimator:
-SVC(C=2.4210526315789478, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma=0.0057017543859649118,
+SVC(C=1.1315789473684212, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.0038070175438596494,
   kernel=&apos;rbf&apos;, max_iter=-1, probability=False, random_state=None,
   shrinking=True, tol=1.0000000000000001e-05, verbose=False)
 
 Best parameters:
-{&apos;C&apos;: 2.4210526315789478, &apos;tol&apos;: 1.0000000000000001e-05, &apos;gamma&apos;: 0.0057017543859649118}
+{&apos;C&apos;: 1.1315789473684212, &apos;tol&apos;: 1.0000000000000001e-05, &apos;gamma&apos;: 0.0038070175438596494}
 
-Best score from the training (cross-validated) set: 0.818967062748
-F1 score on test set with the best estimator: 0.829931972789
+Best score from the training (cross-validated) set: 0.818179114096
+F1 score on test set with the best estimator: 0.826666666667
 </pre>
 </div>
 </div>
@@ -3731,7 +3823,7 @@ F1 score on test set with the best estimator: 0.829931972789
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Accuracy of the best estimator: 0.736842105263
+<pre>Accuracy of the best estimator: 0.726315789474
 </pre>
 </div>
 </div>
