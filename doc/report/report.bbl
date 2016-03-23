@@ -1,8 +1,39 @@
-\begin{thebibliography}{MAP06}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{HCL{\etalchar{+}}03}
+
+\bibitem[BGV92]{boser1992}
+Bernhard~E Boser, Isabelle~M Guyon, and Vladimir~N Vapnik.
+\newblock A training algorithm for optimal margin classifiers.
+\newblock In {\em Proceedings of the fifth annual workshop on Computational
+  learning theory}, pages 144--152. ACM, 1992.
+
+\bibitem[HCL{\etalchar{+}}03]{hsu2003}
+Chih-Wei Hsu, Chih-Chung Chang, Chih-Jen Lin, et~al.
+\newblock A practical guide to support vector classification.
+\newblock 2003.
+
+\bibitem[Joa98]{joachims1998}
+Thorsten Joachims.
+\newblock Text categorization with support vector machines: Learning with many
+  relevant features.
+\newblock {\em European Conference on Machine Learning (ECML)}, pages 137--142,
+  1998.
+
+\bibitem[Joa05]{joachims2005}
+Thorsten Joachims.
+\newblock A support vector method for multivariate performance measures.
+\newblock In {\em Proceedings of the 22nd international conference on Machine
+  learning}, pages 377--384. ACM, 2005.
 
 \bibitem[MAP06]{Metsis06}
 Vangelis Metsis, Ion Androutsopoulos, and Georgios Paliouras.
 \newblock Spam filtering with naive bayes -- which naive bayes?
 \newblock {\em Third Conference on Email and Anti-Spam (CEAS)}, 2006.
+
+\bibitem[Ris01]{Rish01}
+I.~Rish.
+\newblock An empirical study of the naive bayes classifier.
+\newblock {\em Proceedings of IJCAI-01 workshop on Empirical Methods in AI},
+  pages 41--46, 2001.
 
 \end{thebibliography}

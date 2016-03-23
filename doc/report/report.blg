@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: report.aux
 The style file: alpha.bst
 Database file #1: report.bib
-You've used 1 entry,
+Warning--empty journal in hsu2003
+You've used 6 entries,
             2543 wiz_defined-function locations,
-            563 strings with 4612 characters,
-and the built_in function-call counts, 387 in all, are:
-= -- 35
-> -- 25
-< -- 0
-+ -- 9
-- -- 9
-* -- 27
-:= -- 78
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 7
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 13
-empty$ -- 21
-format.name$ -- 10
-if$ -- 71
+            593 strings with 5436 characters,
+and the built_in function-call counts, 2727 in all, are:
+= -- 286
+> -- 105
+< -- 7
++ -- 40
+- -- 36
+* -- 166
+:= -- 427
+add.period$ -- 20
+call.type$ -- 6
+change.case$ -- 36
+chr.to.int$ -- 6
+cite$ -- 7
+duplicate$ -- 125
+empty$ -- 196
+format.name$ -- 44
+if$ -- 584
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 6
+missing$ -- 6
+newline$ -- 34
+num.names$ -- 18
+pop$ -- 41
 preamble$ -- 1
-purify$ -- 8
+purify$ -- 42
 quote$ -- 0
-skip$ -- 13
+skip$ -- 111
 stack$ -- 0
-substring$ -- 7
-swap$ -- 1
-text.length$ -- 0
-text.prefix$ -- 0
+substring$ -- 166
+swap$ -- 41
+text.length$ -- 7
+text.prefix$ -- 3
 top$ -- 0
-type$ -- 8
-warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 14
+type$ -- 48
+warning$ -- 1
+while$ -- 27
+width$ -- 9
+write$ -- 80
+(There was 1 warning)
