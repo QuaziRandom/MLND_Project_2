@@ -153,7 +153,9 @@
 	
 	\subsection{Boosting}
 	
-	\begin{table}[!ht]
+	Boosting is a class of ensemble-based supervised learning (meta-)algorithms that follow the principle of assembling a \emph{strong} estimator from a bunch of \emph{weak} estimators. By definition, a \emph{weak} estimator has a performance only better than predicting by chance, i.e., error of lesser than 0.5 in binary classification. Boosting iteratively tries to fit these \emph{weak} estimators to the data by exaggerating weights of the samples that were misclassified in the previous iteration. This effectively changes the \emph{distribution} of data samples from the perspective of the \emph{weak} learners or hypotheses. The final hypothesis then will be similar to a weighted sum of the individual hypotheses gathered in each iteration. The weights are a function of the prediction error in the iteration. This simple technique of adapting weak estimators to form a voting (vaguely) ensemble is very powerful \cite{shapire1990}, and a robust, well-proven version of it, called \emph{AdaBoost} \cite{Freund1997} is used here. Quite surprisingly, it has been shown that AdaBoost (and boosting in general) is highly resistant to overfitting \cite{Schapire2013}, given truly \emph{weak} estimators are used, sufficient margins are created in each iteration and data is not too noisy. Thus, Boosting could ideally be the best algorithm for this project. The downside however, could be the (linearly) scaling computational cost, which gets added up from the individual estimators.
+	
+	\begin{table}[h]
 		\centering
 		\begin{tabular}{l|ccc}
 			\toprule
@@ -171,7 +173,14 @@
 		\label{tab:adaboost_weak_100}
 	\end{table}
 	
+	\texttt{AdaBoostClassifier()} from \texttt{scikit-learn} makes it possible to run any \emph{weak} base estimator that supports sample weighting. In the project, \texttt{DecisionTreeClassifier()} is used as base estimator. Since decision trees have a natural tendency to bias towards the dominant class label, and the dataset provided along with the project has more \texttt{'passed == 'yes'} labels,  \emph{data balancing} was performed. This step entails eliminating entries in the dataset that pertain to the dominant label, to equalize with number of non-dominant ones. The number of samples was thus reduced to 260 from the 365 of the unbalanced dataset. So the shuffle-split procedure results in 200 training and 60 test samples, and the training set sizes becomes 100, 150 and 200. Table \ref{tab:adaboost_weak_100} shows this difference in training set sizes, in comparision to previous algorithms such as in Table \ref{tab:naive_bayes_100}. 
+	
+	With the above mentioned data balancing setup, sample runs with two configurations are performed. First, a strong base estimator, i.e., a decision tree of \texttt{max\_depth} 15 is used. It was observed that training $F_1$ scores were always $1.0$ for all training sizes. This shows the potential of overfitting with AdaBoost due to non-adherence of the weak estimator clause. The second (practical configuration) uses a weak decision tree (stump) with \texttt{max\_depth} 1 as its base estimator. A sample run with this configuration is verified to be better than first, and so performance is measured by averaging 100 runs. This is shown in Table \ref{tab:adaboost_weak_100}. It is apparent from the table that the training times is almost an order of magnitude more than the previous models, but it remains more or less constant with different training set sizes because AdaBoost stops at a specified number of iterations (\texttt{n\_estimators}), and doesn't directly depend on the input size. More importantly, although the $F_1$ scores seem to be much lesser than the previous models on test set, it is only as a consequence of \emph{data balancing}. So given the different dataset sizes, there is no direct way to compare between models directly, but it can be seen later that AdaBoost's performance is really not as low as it seems. Section \ref{general_issues} has more details about this \emph{issue}. In any case, it can be concluded that with the given dataset, AdaBoost doesn't perform very well, or the $F_1$ scores are on par with Naive Bayes model. This could change however with a larger, and preferably already balanced, dataset.
+	
+	\section{General Issues} \label{general_issues}
+	
 	\section{Finding the Best Model}
+	Out of the three models tried above, Support Vector Machine based classifier that uses a radial basis function kernel stands unbeaten. 
 	
 	\section{Notes}
 	Use of Neural Networks was considered, but scikit-learn (stable) doesn't directly support multi-layer perceptron currently. Although other libraries (Theano, scikit-neuralnetwork) could be used, exploration has been pushed forward both because it was suggested to "choose 3 supervised learning models that are available in scikit-learn", and neural networks will be later encountered during \emph{Deep Learning}.

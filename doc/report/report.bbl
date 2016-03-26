@@ -7,6 +7,13 @@ Bernhard~E Boser, Isabelle~M Guyon, and Vladimir~N Vapnik.
 \newblock In {\em Proceedings of the fifth annual workshop on Computational
   learning theory}, pages 144--152. ACM, 1992.
 
+\bibitem[FS97]{Freund1997}
+Yoav Freund and Robert~E Schapire.
+\newblock A decision-theoretic generalization of on-line learning and an
+  application to boosting.
+\newblock {\em Journal of Computer and System Sciences}, 55(1):119 -- 139,
+  1997.
+
 \bibitem[HCL{\etalchar{+}}03]{hsu2003}
 Chih-Wei Hsu, Chih-Chung Chang, Chih-Jen Lin, et~al.
 \newblock A practical guide to support vector classification.
@@ -35,5 +42,16 @@ I.~Rish.
 \newblock An empirical study of the naive bayes classifier.
 \newblock {\em Proceedings of IJCAI-01 workshop on Empirical Methods in AI},
   pages 41--46, 2001.
+
+\bibitem[Sch90]{shapire1990}
+Robert~E. Schapire.
+\newblock The strength of weak learnability.
+\newblock {\em Machine Learning}, 5(2):197--227, 1990.
+
+\bibitem[Sch13]{Schapire2013}
+Robert~E. Schapire.
+\newblock {\em Empirical Inference: Festschrift in Honor of Vladimir N.
+  Vapnik}, chapter Explaining AdaBoost, pages 37--52.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2013.
 
 \end{thebibliography}
