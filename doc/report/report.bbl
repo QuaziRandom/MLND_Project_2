@@ -37,6 +37,13 @@ Vangelis Metsis, Ion Androutsopoulos, and Georgios Paliouras.
 \newblock Spam filtering with naive bayes -- which naive bayes?
 \newblock {\em Third Conference on Email and Anti-Spam (CEAS)}, 2006.
 
+\bibitem[Ols05]{Olson2005}
+David~L. Olson.
+\newblock {\em Data Mining and Knowledge Management: Chinese Academy of
+  Sciences Symposium CASDMKM 2004, Beijing, China, July 12-14, 2004. Revised
+  Papers}, chapter Data Set Balancing, pages 71--80.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2005.
+
 \bibitem[Ris01]{Rish01}
 I.~Rish.
 \newblock An empirical study of the naive bayes classifier.
