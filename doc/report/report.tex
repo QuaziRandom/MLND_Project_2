@@ -77,6 +77,24 @@
 	Computationally this is cheaper than the more complicated belief network of Figure \ref{fig:belief_bayesian_inference}, but more importantly, the computational cost of finding the best arrangement of nodes in the belief network during training grows exponentially with number of nodes (or features). Therefore, Bayesian inference -- ideally considered as the \emph{gold} standard for supervised learning -- becomes impractical. 
 	
 	Nevertheless, Naive Bayes still stands out pretty well even as it assumes no causality between the several features of the data. It has been shown to work surprisingly well in many applications, especially in spam-filtering and such text-based classifiers \cite{Metsis06}. Although the dataset provided along with the project doesn't qualify as having much text based data, and it could sway more towards a dataset which has correlated data features, such as in Figure \ref{fig:belief_bayesian_inference}, it has been shown that even with the independence assumption on dependent features, as in Figure \ref{fig:belief_naive_bayes}, Naive Bayes works pretty well \cite{Rish01}. Naive Bayes classifier is also extremely computationally efficient for both training and predicting, considering the amount of calculations involved and it could ideally set a benchmark for the other algorithms to compete against. However, the downside is that the dataset size is quite small considering the number of features, and so Naive Bayes is susceptible to the \emph{curse of dimensionality}.
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &       100 &       200 &       300 \\
+			\midrule
+			Training time (msec)                  &  1.234055 &  1.497984 &  1.840115 \\
+			Prediction time - Training set (msec) &  0.578880 &  0.742912 &  0.931025 \\
+			Prediction time - Testing set (msec)  &  0.527859 &  0.520945 &  0.528097 \\
+			F1 score - Training set               &  0.601942 &  0.770428 &  0.799031 \\
+			F1 score - Testing set                &  0.489362 &  0.730159 &  0.800000 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of Naive Bayes Classifier (single run)}
+		\label{tab:naive_bayes_1}
+	\end{table}
 
 	\begin{table}[h]
 		\centering
@@ -85,47 +103,80 @@
 			{} & \multicolumn{3}{c}{Training set size} \\
 			{} &       100 &       200 &       300 \\
 			\midrule
-			Training time (msec)                  &  1.136737 &  1.401565 &  1.677573 \\
-			Prediction time - Training set (msec) &  0.539596 &  0.743282 &  0.940869 \\
-			Prediction time - Testing set (msec)  &  0.535090 &  0.538042 &  0.541995 \\
-			F1 score - Training set               &  0.703436 &  0.800078 &  0.797350 \\
-			F1 score - Testing set                &  0.613627 &  0.746451 &  0.752224 \\
+			Training time (msec)                  &  1.140807 &  1.380339 &  1.651909 \\
+			Prediction time - Training set (msec) &  0.541310 &  0.731080 &  0.921652 \\
+			Prediction time - Testing set (msec)  &  0.528181 &  0.530350 &  0.533614 \\
+			F1 score - Training set               &  0.696105 &  0.796343 &  0.797403 \\
+			F1 score - Testing set                &  0.599165 &  0.725537 &  0.753784 \\
 			\bottomrule
 		\end{tabular}
 		\caption{Performance of Naive Bayes Classifier (100 runs)}
 		\label{tab:naive_bayes_100}
 	\end{table}
 	
-	\texttt{scikit-learn}'s \texttt{GaussianNB()} is used to train 300 samples from the given dataset in default setting; no additional parameters are provided. This process is repeated for 100 runs and the obtained mean performance is logged in Table \ref{tab:naive_bayes_100}. It can be seen that the training times for the classifier is in the order of a millisecond, and it seems to grow linearly with the training set size. The same holds true for prediction times, and the $F_1$ scores on the test data for a training set size of 300 is remarkable, given the computational cost. 
+	\texttt{scikit-learn}'s \texttt{GaussianNB()} is used to train 300 samples from the given dataset in default setting; no additional parameters are provided. A single run followed by 100 runs (Refer \ref{types_of_runs}) is performed and the corresponding results are logged in Table \ref{tab:naive_bayes_1} and Table \ref{tab:naive_bayes_100} respectively. It can be seen that the training times for the classifier is in the order of a millisecond, and it seems to grow linearly with the training set size. The same holds true for prediction times, and the $F_1$ scores on the test data for a training set size of 300 is remarkable, given the computational cost. 
 	        
 	\subsection{Support Vector Machine}
 	Support Vector Machines (SVM) is one of the most ubiquitous supervised learning algorithms in the realm of statistical inference and machine learning. It is exemplary of a class of classifiers that try to maximize the \emph{margin} for a decision boundary between two classes \cite{boser1992}. Data (or model) generalization -- at least to some extent -- is thus inherently a part of SVM, as the maximum margin ensures that the decision boundary is not too close to the data points, which should prevent over-fitting. It is also incredibly economical as computing of maximum margin and the decision boundaries really boils down to dot products of data sample vectors in the former and data sample vector with sample to predict for the latter. In its simplest form, SVM based classifier (SVC) linearly separates data points with the maximum margin hyper-plane. To work on non-linearly separable data, SVM algorithm also makes it very easy to use \emph{kernel trick} in the model; the previously noted dot product advantage makes the application of a kernel on the data have barely any computational overhead. 
 	
-	Figure \ref{fig:svc_rbf_example} shows a contrived example that considers two non-linearly separable features from the given dataset. It illustrates the extension of the nascent form of SVC (linear separator) with a simple radial basis function (RBF) kernel. It can be seen that the RBF kernel allows formation of complex decision boundaries within the rules of maximum \emph{soft} margin, and fits the data pretty well. 
-	
-	SVC has been proven to work extremely well for text recognition and categorization tasks \cite{boser1992,joachims1998}, such as in optical character readers. It indicates the nature of SVC to adapt to highly non-linear and inter-dependent data features. In the dataset given, it can be said that some of the features are interdependent to an extent, and more importantly are highly non-linear in nature, with an exaggerated sense of discreteness (2 or 3 values). Additionally, SVMs are very amenable to non-linear score metrics such as $F_1$ score used in the project \cite{joachims2005}. Thus SVC should ideally suit the student intervention system context naturally.
-	
-	\texttt{scikit-learn} provides \texttt{SVC()} that is capable of working with several types of kernels and parameters. Single runs -- training and testing -- with \texttt{SVC()} having \emph{linear}, \emph{rbf}, \emph{poly} (\emph{degree} 2 and 3), and \emph{sigmoid} kernels were performed. The (rough) performance extracted from the single runs are then used to decide on the \emph{best} kernel configuration for the context. For all the runs, \emph{best practices} for SVMs \cite{hsu2003} were followed, such as scaling input data values ($[-1,+1]$) so that the features carry zero mean and unit variance. Before scaling, the dataset was shuffled and split into 300 data points for training (later used in subsets) and the rest for testing. The same scaling transformation used for training set was used to scale the test set at the time of \texttt{predict}. \emph{linear} kernel was found to be fast, but performed on par with Naive Bayes classifier in terms of $F_1$ score. \emph{poly} (\emph{degree} 3) kernel's performance was inconsistent; over-fitting seemed to be imminent from the $F_1$ score. \emph{sigmoid} kernel did not suit the dataset very well; it never made a consistent decision boundary and was independent of the training set size. Two kernels, viz., \emph{rbf} and \emph{poly} (\emph{degree} 2) were found to perform well on the dataset. 100 trials with shuffled datasets were performed on each of the these kernels and the mean performance was recorded. Table \ref{tab:svc_poly_100} records the performance of \emph{poly} (\emph{degree} 2) kernel, and Table \ref{tab:svc_rbf_100} records that of \emph{rbf} kernel. With 100 runs, similarities in their performance becomes prevalent; $F_1$ scores on the test data set seem to be very close to each other. Objectively \emph{poly} kernel seems to be better than \emph{rbf} because of the lesser training and prediction times, but given the robustness of \emph{rbf} in other application domains \cite{hsu2003}, it wins out against \emph{poly}.  
-	
-	\begin{figure}[t]
+	\begin{figure}[!ht]
 		\centering
 		\includegraphics[scale=0.5]{example_svc}
 		\caption{Example Support Vector Machine based Classifier with an RBF kernel; \emph{Failures} indicates a student's past failures; \emph{Absences} indicates number of classes a student was absent for. Decision boundaries in grey (student passed) and white (student not passed) are underlying the data points of \emph{passed} label from the dataset.}
 		\label{fig:svc_rbf_example}
 	\end{figure}
 	
+	Figure \ref{fig:svc_rbf_example} shows a contrived example that considers two non-linearly separable features from the given dataset. It illustrates the extension of the nascent form of SVC (linear separator) with a simple radial basis function (RBF) kernel. It can be seen that the RBF kernel allows formation of complex decision boundaries within the rules of maximum \emph{soft} margin, and fits the data pretty well. 
+	
+	SVC has been proven to work extremely well for text recognition and categorization tasks \cite{boser1992,joachims1998}, such as in optical character readers. It indicates the nature of SVC to adapt to highly non-linear and inter-dependent data features. In the dataset given, it can be said that some of the features are interdependent to an extent, and more importantly are highly non-linear in nature, with an exaggerated sense of discreteness (2 or 3 values). Additionally, SVMs are very amenable to non-linear score metrics such as $F_1$ score used in the project \cite{joachims2005}. Thus SVC should ideally suit the student intervention system context naturally.
+	
 	\begin{table}[h]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &       100 &       200 &        300 \\
+			\midrule
+			Training time (msec)                  &  1.495123 &  4.133940 &  11.901855 \\
+			Prediction time - Training set (msec) &  0.791788 &  2.635002 &   6.358147 \\
+			Prediction time - Testing set (msec)  &  0.774860 &  2.138138 &   2.794027 \\
+			F1 score - Training set               &  0.923077 &  0.895425 &   0.891353 \\
+			F1 score - Testing set                &  0.805195 &  0.812903 &   0.818182 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of SVC Polynomial $2^{nd}$ degree Kernel (single run)}
+		\label{tab:svc_poly_1}
+	\end{table}
+	
+	\begin{table}[!ht]
 		\centering
 		\begin{tabular}{l|ccc}
 			\toprule
 			{} & \multicolumn{3}{c}{Training set size} \\
 			{} &       100 &       200 &       300 \\
 			\midrule
-			Training time (msec)                  &  1.436007 &  4.016979 &  8.038867 \\
-			Prediction time - Training set (msec) &  0.798676 &  2.626345 &  5.504694 \\
-			Prediction time - Testing set (msec)  &  0.758820 &  1.313007 &  1.809123 \\
-			F1 score - Training set               &  0.912564 &  0.903239 &  0.895141 \\
-			F1 score - Testing set                &  0.794443 &  0.790969 &  0.792418 \\
+			Training time (msec)                  &  2.232075 &  4.521847 &  9.538889 \\
+			Prediction time - Training set (msec) &  1.032114 &  3.026009 &  6.134987 \\
+			Prediction time - Testing set (msec)  &  0.784874 &  1.445055 &  2.069950 \\
+			F1 score - Training set               &  0.917197 &  0.907285 &  0.905405 \\
+			F1 score - Testing set                &  0.820513 &  0.812903 &  0.818182 \\
+		\end{tabular}
+		\caption{Performance of SVC Polynomial $3^{rd}$ degree Kernel (single run)}
+		\label{tab:svc_poly_3_degree_1}
+	\end{table}
+	
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &       100 &       200 &       300 \\
+			\midrule
+			Training time (msec)                  &  1.450677 &  4.090371 &  8.153820 \\
+			Prediction time - Training set (msec) &  0.807276 &  2.591932 &  5.424671 \\
+			Prediction time - Testing set (msec)  &  0.760419 &  1.305692 &  1.772885 \\
+			F1 score - Training set               &  0.915101 &  0.903190 &  0.896303 \\
+			F1 score - Testing set                &  0.799621 &  0.796329 &  0.798391 \\
 			\bottomrule
 		\end{tabular}
 		\caption{Performance of SVC Polynomial $2^{nd}$ degree Kernel (100 runs)}
@@ -137,24 +188,64 @@
 		\begin{tabular}{l|ccc}
 			\toprule
 			{} & \multicolumn{3}{c}{Training set size} \\
-			{} &       100 &       200 &       300 \\
+			{} &       100 &       200 &        300 \\
 			\midrule
-			Training time (msec)                  &  1.720572 &  5.235305 &  10.758593 \\
-			Prediction time - Training set (msec) &  1.102505 &  3.869443 &   8.228962 \\
-			Prediction time - Testing set (msec)  &  1.050613 &  1.893101 &   2.676311 \\
-			F1 score - Training set               &  0.927031 &  0.911822 &   0.904793 \\
-			F1 score - Testing set                &  0.800927 &  0.805108 &   0.808884 \\
+			Training time (msec)                  &  1.749039 &  5.638123 &  11.893034 \\
+			Prediction time - Training set (msec) &  1.103163 &  4.788876 &   8.475065 \\
+			Prediction time - Testing set (msec)  &  1.050949 &  2.451181 &   2.701044 \\
+			F1 score - Training set               &  0.929032 &  0.901316 &   0.895323 \\
+			F1 score - Testing set                &  0.807692 &  0.802548 &   0.818182 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of SVC RBF Kernel (single run)}
+		\label{tab:svc_rbf_1}
+	\end{table}
+	
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &       100 &       200 &        300 \\
+			\midrule
+			Training time (msec)                  &  1.721036 &  5.187237 &  10.721319 \\
+			Prediction time - Training set (msec) &  1.109087 &  3.853130 &   8.189697 \\
+			Prediction time - Testing set (msec)  &  1.050169 &  1.879785 &   2.673924 \\
+			F1 score - Training set               &  0.931261 &  0.915022 &   0.905248 \\
+			F1 score - Testing set                &  0.801439 &  0.805833 &   0.808297 \\
 			\bottomrule
 		\end{tabular}
 		\caption{Performance of SVC RBF Kernel (100 runs)}
 		\label{tab:svc_rbf_100}
 	\end{table}
 	
+	\texttt{scikit-learn} provides \texttt{SVC()} that is capable of working with several types of kernels and parameters. Single runs -- training and testing -- with \texttt{SVC()} having \emph{linear}, \emph{rbf}, \emph{poly} (\emph{degree} 2 and 3), and \emph{sigmoid} kernels were performed. The (rough) performance extracted from the single runs are then used to decide on the \emph{best} kernel configuration for the context. For all the runs, \emph{best practices} for SVMs \cite{hsu2003} were followed, such as scaling input data values ($[-1,+1]$) so that the features carry zero mean and unit variance. Before scaling, the dataset was shuffled and split into 300 data points for training (later used in subsets) and the rest for testing. The same scaling transformation used for training set was used to scale the test set at the time of \texttt{predict}. For the single runs, only the performance data pertaining to good contentendors (kernels) are provided below. \emph{linear} kernel was found to be fast, but performed on par with Naive Bayes classifier in terms of $F_1$ score. \emph{sigmoid} kernel did not suit the dataset very well; it didn't make any perceptible decision boundary and was independent of the training set size. Two kernels, viz., \emph{rbf} in Table \ref{tab:svc_rbf_1} and \emph{poly} (\emph{degree} 2) in Table \ref{tab:svc_poly_1} were found to perform well on the dataset. \emph{poly} (\emph{degree} 3) in Table \ref{tab:svc_poly_3_degree_1}, also seems to be doing pretty good, but it was found that over-fitting was imminent (as evident in the slightly higher testing $F_1$ score here) and also the score tended to vary a lot with different dataset splits. 
+	
+	100 runs are performed with the best kernels; Table \ref{tab:svc_poly_100} records the performance of \emph{poly} (\emph{degree} 2) kernel, and Table \ref{tab:svc_rbf_100} records that of \emph{rbf} kernel. With 100 runs, similarities in their performance becomes prevalent; $F_1$ scores on the test data set seem to be very close to each other. Objectively \emph{poly} kernel seems to be better than \emph{rbf} because of the lesser training and prediction times, but given the robustness of \emph{rbf} in other application domains \cite{hsu2003}, it wins out against \emph{poly}.  
+	
 	\subsection{Boosting}
 	
 	Boosting is a class of ensemble-based supervised learning (meta-)algorithms that follow the principle of assembling a \emph{strong} estimator from a bunch of \emph{weak} estimators. By definition, a \emph{weak} estimator has a performance only better than predicting by chance, i.e., error of lesser than 0.5 in binary classification. Boosting iteratively tries to fit these \emph{weak} estimators to the data by exaggerating weights of the samples that were misclassified in the previous iteration. This effectively changes the \emph{distribution} of data samples from the perspective of the \emph{weak} learners or hypotheses. The final hypothesis then will be similar to a weighted sum of the individual hypotheses gathered in each iteration. The weights are a function of the prediction error in the iteration. This simple technique of adapting weak estimators to form a voting (vaguely) ensemble is very powerful \cite{shapire1990}, and a robust, well-proven version of it, called \emph{AdaBoost} \cite{Freund1997} is used here. Quite surprisingly, it has been shown that AdaBoost (and boosting in general) is highly resistant to overfitting \cite{Schapire2013}, given truly \emph{weak} estimators are used, sufficient margins are created in each iteration and data is not too noisy. Thus, Boosting could ideally be the best algorithm for this project. The downside however, could be the (linearly) scaling computational cost, which gets added up from the individual estimators.
 	
 	\begin{table}[h]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &         100 &         150 &         200 \\
+			\midrule
+			Training time (msec)                  &  117.190123 &  142.978907 &  119.709969 \\
+			Prediction time - Training set (msec) &    9.433985 &    9.639978 &   10.140896 \\
+			Prediction time - Testing set (msec)  &   11.713028 &    7.894993 &    7.919073 \\
+			F1 score - Training set               &    0.937500 &    0.855072 &    0.827586 \\
+			F1 score - Testing set                &    0.509091 &    0.581818 &    0.612903 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of AdaBoost Classifier (single run) with balanced dataset}
+		\label{tab:adaboost_weak_balanced_1}
+	\end{table}
+	
+	\begin{table}[!ht]
 		\centering
 		\begin{tabular}{l|ccc}
 			\toprule
@@ -168,20 +259,56 @@
 			F1 score - Testing set                &    0.586345 &    0.614715 &    0.622481 \\
 			\bottomrule
 		\end{tabular}
-		\caption{Performance of AdaBoost Classifier (100 runs)}
-		\label{tab:adaboost_weak_100}
+		\caption{Performance of AdaBoost Classifier (100 runs) with balanced dataset}
+		\label{tab:adaboost_weak_balanced_100}
 	\end{table}
 	
-	\texttt{AdaBoostClassifier()} from \texttt{scikit-learn} makes it possible to run any \emph{weak} base estimator that supports sample weighting. In the project, \texttt{DecisionTreeClassifier()} is used as base estimator. Since decision trees have a natural tendency to bias towards the dominant class label, and the dataset provided along with the project has more \texttt{'passed == 'yes'} labels,  \emph{data balancing} was performed. This step entails eliminating entries in the dataset that pertain to the dominant label, to equalize with number of non-dominant ones. The number of samples was thus reduced to 260 from the 365 of the unbalanced dataset. So the shuffle-split procedure results in 200 training and 60 test samples, and the training set sizes becomes 100, 150 and 200. Table \ref{tab:adaboost_weak_100} shows this difference in training set sizes, in comparision to previous algorithms such as in Table \ref{tab:naive_bayes_100}. 
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &         100 &         200 &         300 \\
+			\midrule
+			Training time (msec)                  &  137.079000 &  130.676985 &  129.156113 \\
+			Prediction time - Training set (msec) &    8.861065 &   10.184050 &   11.499882 \\
+			Prediction time - Testing set (msec)  &    8.553982 &    8.610010 &    8.504868 \\
+			F1 score - Training set               &    0.993103 &    0.901408 &    0.865882 \\
+			F1 score - Testing set                &    0.753623 &    0.788732 &    0.772414 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of AdaBoost Classifier (single run) with identical dataset as used for other models}
+		\label{tab:adaboost_weak_unbalanced_1}
+	\end{table}
 	
-	With the above mentioned data balancing setup, sample runs with two configurations are performed. First, a strong base estimator, i.e., a decision tree of \texttt{max\_depth} 15 is used. It was observed that training $F_1$ scores were always $1.0$ for all training sizes. This shows the potential of overfitting with AdaBoost due to non-adherence of the weak estimator clause. The second (practical configuration) uses a weak decision tree (stump) with \texttt{max\_depth} 1 as its base estimator. A sample run with this configuration is verified to be better than first, and so performance is measured by averaging 100 runs. This is shown in Table \ref{tab:adaboost_weak_100}. It is apparent from the table that the training times is almost an order of magnitude more than the previous models, but it remains more or less constant with different training set sizes because AdaBoost stops at a specified number of iterations (\texttt{n\_estimators}), and doesn't directly depend on the input size. More importantly, although the $F_1$ scores seem to be much lesser than the previous models on test set, it is only as a consequence of \emph{data balancing}. So given the different dataset sizes, there is no direct way to compare models, but it can be seen later that AdaBoost's performance is really not as low as it seems. Section \ref{general_issues} has more details about this \emph{issue}. In any case, it can be concluded that with the given dataset, AdaBoost doesn't perform very well, or the $F_1$ scores are on par with Naive Bayes model. This could change however with a larger, and preferably already balanced, dataset.
+	\begin{table}[!ht]
+		\centering
+		\begin{tabular}{l|ccc}
+			\toprule
+			{} & \multicolumn{3}{c}{Training set size} \\
+			{} &         100 &         200 &         300 \\
+			\midrule
+			Training time (msec)                  &  108.652627 &  116.185341 &  125.313888 \\
+			Prediction time - Training set (msec) &    8.656120 &   10.007663 &   11.349833 \\
+			Prediction time - Testing set (msec)  &    8.542781 &    8.599198 &    8.634429 \\
+			F1 score - Training set               &    0.975519 &    0.885755 &    0.859142 \\
+			F1 score - Testing set                &    0.738435 &    0.764309 &    0.770984 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Performance of AdaBoost Classifier (100 runs) with identical dataset as used for other models}
+		\label{tab:adaboost_weak_unbalanced_100}
+	\end{table}
+	
+	\texttt{AdaBoostClassifier()} from \texttt{scikit-learn} makes it possible to run any \emph{weak} base estimator that supports sample weighting. In the project, \texttt{DecisionTreeClassifier()} is used as base estimator. Since decision trees have a natural tendency to bias towards the dominant class label, and the dataset provided along with the project has more \texttt{'passed' == 'yes'} labels,  \emph{data balancing} was performed. This step entails eliminating entries in the dataset that pertain to the dominant label, to equalize with number of non-dominant ones. The number of samples was thus reduced to 260 from the 365 of the unbalanced dataset. So the shuffle-split procedure results in 200 training and 60 test samples, and the training set sizes becomes 100, 150 and 200. Table \ref{tab:adaboost_weak_balanced_100} shows this difference in training set sizes, in comparision to previous algorithms such as in Table \ref{tab:naive_bayes_100}. 
+	
+	With the above mentioned data balancing setup, sample runs with two configurations are performed. First, a strong base estimator, i.e., a decision tree of \texttt{max\_depth} 15 is used. It was observed that training $F_1$ scores were always $1.0$ for all training sizes. This shows the potential of overfitting with AdaBoost due to non-adherence of the weak estimator clause. The second (practical configuration) uses a weak decision tree (stump) with \texttt{max\_depth} 1 as its base estimator. A single run (Table \ref{tab:adaboost_weak_balanced_1}) with this configuration is verified to be better than first, and so performance is measured by averaging 100 runs. This is shown in Table \ref{tab:adaboost_weak_balanced_100}. It is apparent from the tables that the training times is almost an order of magnitude more than the previous models, but it remains more or less constant with different training set sizes because AdaBoost stops at a specified number of iterations (\texttt{n\_estimators}), and doesn't directly depend on the input size. More importantly, it can be seen that the $F_1$ scores seem to be much lesser than the previous models on test set. This is only as a consequence of \emph{data balancing}, and so \emph{direct} comparison of models is impossible. So, to obtain equivalent scores, a single run and 100 runs with the same dataset configuration as used with other models were also performed and are logged in Table \ref{tab:adaboost_weak_unbalanced_1} and Table \ref{tab:adaboost_weak_unbalanced_100} respectively. In case indirect comparison is needed, Section \ref{indirect_comparison} discusses a possible mechanism. Using the performance results directly from Table \ref{tab:adaboost_weak_unbalanced_100}, it can be concluded that with the given dataset, AdaBoost doesn't perform very well, and the $F_1$ scores are on par with Naive Bayes model. This could change however with a larger, and preferably already balanced, dataset.
 		
 	\section{Finding the Best Model}
 	Out of the three models tried above, Support Vector Machine based classifier (SVC) that uses a radial basis function (RBF) kernel seems to be the best model. 
 	
-	Objectively comparing the performance tables above, it can be seen that Naive Bayes classifier (Table \ref{tab:naive_bayes_100}) is a very good contender. Its computational efficieny -- just 1.67 ms training time with 300 data points -- is unmatched, and $F_1$ score appears to grow with the training size. It cannot be immediately concluded from the table that the $F_1$ score could continously improve with training set size. However, it should be apparent -- at least from the \emph{simplicity} of the model -- that it cannot differentiate correlated data (features that assume causality). And given student data appears to have a few features that could be highly correlated, the \emph{assumptions} made in the model might give in. There are also no \emph{parameters} to tune with Naive Bayes classifier. This is really not a qualification criteria for a model, but it could be helpful if there would have been some parameter that could adapt the classifer to a specific context. Boosting classifier (AdaBoost) was very expensive computationally -- around 116 ms -- as shown in Table \ref{tab:adaboost_weak_100}, and somehow, it didn't fit very well in the context of the given dataset. As already pointed out, the $F_1$ scores cannot be directly compared to other models because the dataset is balanced in case of AdaBoost. An equivalent $F_1$ score could roughly (and conveniently) be calculated by \emph{scaling} the AdaBoost's score with the \emph{degenerate score} (discussed in \ref{general_issues}) for an unbalanced dataset. That is, if the degenerate $F_1$ score for a classifier operating on a balanced dataset ($label^+:label^- = 1:1$) is $\frac{2}{3}$, the equivalent $F_1$ score on an imbalanced dataset ($label^+:label^- = 2:3$) will need to be scaled by $\frac{4}{5}$. By this metric, AdaBoost's $F_1$ score for 200 training points will become 0.74664 from its original 0.62248. So equivalently, AdaBoost is more or less on par with Naive Bayes Classifier in terms of $F_1$ score. However, if a larger dataset (maybe 10 times larger) were given, AdaBoost could be re-evaluated and it might show much better results. It is assumed however that a larger dataset wouldn't be available. 
+	Objectively comparing the performance tables above, it can be seen that Naive Bayes classifier (Table \ref{tab:naive_bayes_100}) is a very good contender. Its computational efficieny -- just 1.65 ms training time with 300 data points -- is unmatched, and $F_1$ score appears to grow with the training size. It cannot be immediately concluded from the table that the $F_1$ score could continously improve with training set size. However, it should be apparent -- at least from the \emph{simplicity} of the model -- that it cannot differentiate correlated data (features that assume causality). And given student data appears to have a few features that could be highly correlated, the \emph{assumptions} made in the model might give in. There are also no \emph{parameters} to tune with Naive Bayes classifier. This is really not a qualification criteria for a model, but it could be helpful if there would have been some parameter that could adapt the classifer to a specific context. Boosting classifier (AdaBoost) was very expensive computationally -- around 120 ms -- as shown in Table \ref{tab:adaboost_weak_unbalanced_100}, and somehow, it didn't fit very well in the context of the given dataset. As already pointed out, the $F_1$ scores cannot be directly compared to other models if dataset balancing is used, but an equivalent $F_1$ score could be roughly derived if comparison is inevitable in Section \ref{indirect_comparison}. Considering the performance of unbalanced dataset, AdaBoost's $F_1$ score is more or less similar to that Naive Bayes. However, if a larger dataset (maybe 10 times larger) were given, AdaBoost could be re-evaluated and it might show much better results. It is assumed however that a larger dataset wouldn't be available. 
 	
-	SVC in a sense, balances both ends of the spectrum covered by the other two models. It doesn't intrinsically make naive assumptions on the dataset as Naive Bayes Classifier, and it doesn't rely on intense computations such as with Boosting classifier. Although SVC is not resistant to the \emph{curse of dimensionality}, it gives an advantage over relatively smaller datasets as it inherently tends towards data generalization. For the given dataset, it can be seen from Table \ref{tab:svc_rbf_100} (and Table \ref{tab:svc_poly_100}) that SVC achieves both the best $F_1$ scores (around 0.80) and the best balance of computational efficiency and model accuracy. As already noted, polynomial kernel is a very close competitor to the RBF kernel based SVC, and RBF is chosen as most appropriate both because of its marginal improvement in $F_1$ score and because of its perceived robustness. Also, like for other models, SVC would definitely benefit from a larger dataset to improve accuracy, and since it appears that training times almost linearly grows with the dataset size, a dataset of at least 10 times the given size is required before training times of AdaBoost classifier would start to match SVC. Thus, SVC is found to be the best model for the student intervention system context.
+	SVC in a sense, balances both ends of the spectrum covered by the other two models. It doesn't intrinsically make naive assumptions on the dataset as Naive Bayes Classifier, and it doesn't rely on intense computations such as with Boosting classifier. Although SVC is not completely resistant to the \emph{curse of dimensionality}, it gives an advantage over relatively smaller datasets as it inherently tends towards data generalization. For the given dataset, it can be seen from Table \ref{tab:svc_rbf_100} (and Table \ref{tab:svc_poly_100}) that SVC achieves both the best $F_1$ scores (around 0.80) and the best balance of computational efficiency and model accuracy. As already noted, polynomial kernel is a very close competitor to the RBF kernel based SVC, and RBF is chosen as most appropriate both because of its marginal improvement in $F_1$ score and because of its perceived robustness. Also, like for other models, SVC would definitely benefit from a larger dataset to improve accuracy, and since it appears that training times almost linearly grows with the dataset size, a dataset of at least 10 times the given size is required before training times of AdaBoost classifier would start to match SVC. Thus, SVC is found to be the best model for the student intervention system context.
 	
 	\subsection{Layman Explanation}
 	The task of a good machine learning classification algorithm is to find the \emph{pattern} between two classes/labels (student passed or not), and given an unknown sample (new student data), be able to reliably and effectively predict the class it belongs to. Support Vector Machine (SVM) based classification algorithms fall under a class of algorithms that tries to predict the \emph{optimal decision boundary} between two or more classes.
@@ -204,7 +331,7 @@
 		\label{fig:svm_decision_boundary_demo}
 	\end{figure}
 	
-	The concept of \emph{Optimal decision boundary} could be explained with an example. The two graphs in Figure \ref{fig:svm_decision_boundary_demo} represent a dataset with two \emph{features} viz., x1 and x2. x1 and x2 for instance could represent "number of past failures" and "number of absences" respectively. Assuming the data points colored \emph{red} in Figure \ref{fig:svm_decision_boundary_demo} are negative samples and those colored \emph{cyan} are positive samples, intuitively a clear \emph{decision boundary} can be seen between the two sets of data points. A \emph{decision boundary} in this case, is a line dividing the two halves of the graph such that all red points lie on one side and all the cyan lie on the other. When a new sample point is encountered, a \emph{decision} is taken based on the side the new sample point happens to fall into. It is important to realize that there are infintely many ways the graph can be divided up according to the above criteria. That is, any line that is \emph{contained} within the top-left red point and bottom-right cyan point can serve as the decision boundaries. Figure \ref{fig:possible_decision_boundaries} represents three such possible decision boundaries. 
+	The concept of \emph{Optimal decision boundary} could be explained with an example. The two graphs in Figure \ref{fig:svm_decision_boundary_demo} represent a dataset with two \emph{features} viz., x1 and x2. x1 and x2 for instance could represent ``number of past failures" and ``number of absences" respectively. Assuming the data points colored \emph{red} in Figure \ref{fig:svm_decision_boundary_demo} are negative samples and those colored \emph{cyan} are positive samples, intuitively a clear \emph{decision boundary} can be seen between the two sets of data points. A \emph{decision boundary} in this case, is a line dividing the two halves of the graph such that all red points lie on one side and all the cyan lie on the other. When a new sample point is encountered, a \emph{decision} is taken based on the side the new sample point happens to fall into. It is important to realize that there are infintely many ways the graph can be divided up according to the above criteria. That is, any line that is \emph{contained} within the top-left red point and bottom-right cyan point can serve as the decision boundaries. Figure \ref{fig:possible_decision_boundaries} represents three such possible decision boundaries. 
 	
 	Figure \ref{fig:possible_decision_boundaries} can be used to demonstrate the pitfalls of selecting \emph{any} decision boundary that squarely divides up the data points. If the machine learning algorithm chooses Line 1, a new data point that is close to the top-left red point but slightly to its left, could get misclassified as a cyan point because of the decision boundary lying close to the top-left red point. Line 3 also possesses similar characteristics, but differs in that the line lies close to the cyan data points; it might misclassify new samples close to cyan points and the line as red points. Intuitively, thus, line 2 appears to be optimal among the three because it achieves the right \emph{balance} by being the farthest from both the sets of data points. This characteristic is also called \emph{data generalization} and it is achieved by an \emph{optimal decision boundary}. SVM finds the optimal boundary by finding a line between the data points that \emph{maximizes} the \emph{margin} between them. \emph{Margins} can be visualized as the leeway from the decision boundary in which no data point exists. The margins thus will fall on a few data points that are closest to the decision boundary. Figure \ref{fig:optimal_decision_boundary} illustrates this concept. In reality, such \emph{hard margins} are not stipulated in SVM; some tolerance for the formation of margins is accepted depending on the context.
 	
@@ -218,9 +345,12 @@
 	The example in Figure \ref{fig:svm_decision_boundary_demo} represents a dataset which could be linearly separated (decision boundary is a line). Additionally however, SVM is adaptable to datasets that are non-linearly separable (decision boundary as a curve or some complex shape) too by employing \emph{kernel trick}. Figure \ref{fig:kernel_trick} illustrates a case where the non-linearly separable data points are \emph{mapped} to a different space using a $\phi$ kernel function. SVM can be imagined to maximize the margin on the $\phi$ transformed data points, that have become linearly separable due to the application of kernel. This is an oversimplification because in reality, SVM performs the computations needed for kernel and the optimal decision boundary in a very efficient manner. In effect, SVM can be used for a wide variety of application domains, and investigation (above) with the student data has proved its efficacy for usage in student intervention system.
 	
 	\subsection{Fine-tune and Performance of Best Model}
-	\texttt{GridSearchCV()} was used to find the \emph{best} parameters for SVC. Given that the best kernel (RBF) was already found, three parameters viz., \texttt{gamma}, \texttt{C} and \texttt{tol}, were grid-searched. \texttt{gamma} influences a sort of \emph{radius of influence} of a data point that is part of the support vectors -- lower \texttt{gamma} will have smaller influences. \texttt{C} parameter defines the smoothness of the decision surface -- high \texttt{C} generally leading to over-fitting. \texttt{tol} is related to the stopping criterion. A certain range around the default values for these parameters were chosen for the parameter grid. The entire training dataset (300 samples) was used, and (standard) scaling on the features was performed before the grid search. The cross-validated grid search yielded an \emph{optimum} classifier with $F_1$ score of 0.827 with the test set. This indicates that the fine-tuned model is just marginally better than default RBF based model. Nevertheless, SVC has proven to be the most suitable supervised machine learning algorithm for the student intervention system.
+	\texttt{GridSearchCV()} was used to find the \emph{best} parameters for SVC. Given that the best kernel (RBF) was already found, three parameters viz., \texttt{gamma}, \texttt{C} and \texttt{tol}, were grid-searched. \texttt{gamma} influences a sort of \emph{radius of influence} of a data point that is part of the support vectors -- lower \texttt{gamma} will have smaller influences. \texttt{C} parameter defines the smoothness of the decision surface -- high \texttt{C} generally leading to over-fitting. \texttt{tol} is related to the stopping criterion. A certain range around the default values for these parameters were chosen for the parameter grid. The entire training dataset (300 samples) was used, and (standard) scaling on the features was performed before the grid search. The cross-validated grid search yielded an \emph{optimum} classifier with $F_1$ score of 0.81 with the test set. This indicates that the fine-tuned model performs more or less similar to the default RBF based configuration. Nevertheless, SVC has proven to be the most suitable supervised machine learning algorithm for the student intervention system.
 	
 	\section{Notes}
+	
+	\subsection{Single run and 100 runs} \label{types_of_runs}
+	To make sure that equivalent model performances are obtained, equally shuffled and split dataset is ensured as input. That is, during single runs (also called sample runs), it is made sure the same dataset split (and shuffle) is performed for all models and in case of 100 runs, the same series of shuffle and split is performed. The seed to the pseudo-random generator that is used for shuffling is adjusted for each run (or block of runs) to maintain this consistency. Additionally, during the split, (reliable) stratification is ensured, and is followed by data scaling where necessary (Ex: SVC).
 	
 	\subsection{General Issues} \label{general_issues}
 	
@@ -228,7 +358,10 @@
 	It appeared initially that the dataset given was not really a \emph{good} dataset, in that none of the models seemed to perform very well. Consider the case where all models would predict a positive label regardless of the input. The $F_1$ score with the entire dataset would thus be $\frac{4}{5} = 0.80$, as the precision would be roughly $\frac{2}{3}$ because data set has $label^+:label^-$ around $\frac{2}{3}$, and recall would be $1$ as it would always predict $label^+$. This case could be called the \emph{degenerate} case, and in some places above, the corresponding $F_1$ score is referred to as \emph{degenerate score}. Quite annoyingly (initially) none of the models seemed to be performing any better than the \emph{degenerate score}. It was however verified that the models themselves didn't land into degeneracy by only predicting $label^+$, and there were a few false negatives. Ideally, considering that the best model performs just marginally better than the degenerate score, either the need for the complex machine learning could be questioned, or assuming the models are comprehensive, the dataset's representation of required information could be questioned. In either case however, we can't conclude from this that the usage of a prediction system is futile or that dataset is unusable. Confidence, I think, can only be improved with a larger dataset, if available. The \emph{degenerate score} and scaling of a model's $F_1$ score to match models might not be a standard method -- it was thought appropriate as a natural extension.
 	
 	\subsubsection{Dataset balancing}
-	In the case of AdaBoost, the initial experiments with Decision Tree Classifier as the base estimator revealed that it tended to bias towards a few features too often. To counter this, data balancing was performed, by eliminating the dominant samples randomly until their numbers equaled that of non-dominant samples. It was observed that the $F_1$ scores with the balanced dataset drastically fell down, but it was noted that this was natural both as a consequence of less representation from dominant samples and the total number of \emph{available} training samples being much lower. Similar tests with dataset balancing \cite{Olson2005} also indicate decline in accuracy, but not in perceived performance. Scaling of $F_1$ score was also required when directly comparing models, and it was considered apt to use \emph{degenerate scores} as benchmarks.
+	In the case of AdaBoost, the initial experiments with Decision Tree Classifier as the base estimator revealed that it tended to bias towards a few features too often. To counter this, data balancing was performed, by eliminating the dominant samples randomly until their numbers equaled that of non-dominant samples. It was observed that the $F_1$ scores with the balanced dataset drastically fell down, but it was noted that this was natural both as a consequence of less representation from dominant samples and the total number of \emph{available} training samples being much lower. Similar tests with dataset balancing \cite{Olson2005} also indicate decline in accuracy, but not in perceived performance.
+	
+	\subsubsection{Indirect comparison} \label{indirect_comparison}
+	It is difficult to compare models operating on datasets that vary in their label distribution. Using AdaBoost's performance (in Table \ref{tab:adaboost_weak_balanced_100}) as example, a possible mechanism to perform indirect comparison between balanced and unbalanced dataset is derived. An equivalent $F_1$ score could be calculated by \emph{scaling} the AdaBoost's score with the \emph{degenerate score} for an unbalanced dataset. That is, if the degenerate $F_1$ score for a classifier operating on a balanced dataset ($label^+:label^- = 1:1$) is $\frac{2}{3}$, the equivalent $F_1$ score on an imbalanced dataset ($label^+:label^- = 2:3$) will need to be scaled by $\frac{4}{5}$. By this metric, AdaBoost's $F_1$ score for 200 training points will become 0.74664 from its original 0.62248.
 	
 	\subsection{Neural Network}
 	Use of Neural Networks was considered, but scikit-learn (stable) doesn't directly support multi-layer perceptron currently. Although other libraries (Theano, scikit-neuralnetwork) could be used, exploration has been pushed forward both because it was suggested to ``choose 3 supervised learning models that are available in scikit-learn", and neural networks will hopefully be encountered later during \emph{Deep Learning}.
